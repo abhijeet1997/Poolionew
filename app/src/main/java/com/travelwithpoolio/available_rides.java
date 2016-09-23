@@ -71,17 +71,25 @@ public class available_rides extends AppCompatActivity {
         });
     }
     public List<Data>fill_with_data(){
+        try {
 
-        List<Data> data  = new ArrayList<>();
-        for (int i = 0 ; i<id.length ; i++){
-            if (id[i]!=null) {
-                //Log.e("**CHECKING**",source[0]+" "+ destination[0]+vehicle_name[0]);
-                data.add(new Data(id[i],first_name[i] ,last_name[i],mobile[i],gender[i],source[i], destination[i],type[i],date[i],time[i],vehicle_name[i],vehicle_number[i],seats[i],device_id[i],msg[i]));
+
+            List<Data> data = new ArrayList<>();
+            for (int i = 0; i < id.length; i++) {
+                if (id[i] != null) {
+                    //Log.e("**CHECKING**",source[0]+" "+ destination[0]+vehicle_name[0]);
+                    data.add(new Data(id[i], first_name[i], last_name[i], mobile[i], gender[i], source[i], destination[i], type[i], date[i], time[i], vehicle_name[i], vehicle_number[i], seats[i], device_id[i], msg[i]));
+                }
+
+
             }
-
-
+            return data;
         }
-        return data;
+        catch (Exception e)
+        {
+            Toast.makeText(getApplicationContext(),"Poor internet, try again.",Toast.LENGTH_SHORT).show();
+            return null;
+        }
 
     }
     void findRide(String pickup,String drop,String date, String time)
@@ -152,43 +160,53 @@ public class available_rides extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray result = jsonObject.getJSONArray("result");
             definearray(result.length());
-            for (int i = 0 ; i<result.length() ; i++) {
+            for (int i = 0; i < result.length(); i++) {
                 JSONObject c = result.getJSONObject(i);
 
-                id[i]= c.getString("id");
-                first_name[i]= c.getString("first_name");
-                last_name[i]= c.getString("last_name");
-                gender[i]= c.getString("gender");
+                id[i] = c.getString("id");
+                first_name[i] = c.getString("first_name");
+                last_name[i] = c.getString("last_name");
+                gender[i] = c.getString("gender");
                 mobile[i] = c.getString("mobile");
-                source [i]= c.getString("source");
-                destination [i] = c.getString("destination");
-                type [i]= c.getString("type");
-                date  [i]= c.getString("date");
-                time [i] = c.getString("time");
-                vehicle_name [i] = c.getString("vehicle_name");
-                vehicle_number [i] = c.getString("vehicle_number");
-                seats [i]= c.getString("seats");
-                device_id[i]=c.getString("device_id");
-                msg[i]=c.getString("msg");
+                source[i] = c.getString("source");
+                destination[i] = c.getString("destination");
+                type[i] = c.getString("type");
+                date[i] = c.getString("date");
+                time[i] = c.getString("time");
+                vehicle_name[i] = c.getString("vehicle_name");
+                vehicle_number[i] = c.getString("vehicle_number");
+                seats[i] = c.getString("seats");
+                device_id[i] = c.getString("device_id");
+                msg[i] = c.getString("msg");
                 //Toast.makeText(getApplicationContext(),id[i]+mobile[i],Toast.LENGTH_SHORT).show();
             }
-            if(id.length==0)
-                {
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+            try {
+                if (id.length == 0) {
                     recyclerView.setVisibility(View.GONE);
                     sorryIV.setVisibility(View.VISIBLE);
                     sorryTV.setVisibility(View.VISIBLE);
                     infoTV.setVisibility(View.VISIBLE);
                 }
-            List<Data> data = fill_with_data();
+                List<Data> data = fill_with_data();
 
-            final Recycler_View_Adapter adapter  = new Recycler_View_Adapter(data , getApplication());
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager( new LinearLayoutManager(getApplicationContext()));
+                final Recycler_View_Adapter adapter = new Recycler_View_Adapter(data, getApplication());
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            }
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+            catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Poor internet, please try again", Toast.LENGTH_SHORT).show();
+            }
+
         }
-    }
+
 
     void definearray(int len)
     {

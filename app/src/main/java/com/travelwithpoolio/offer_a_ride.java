@@ -57,6 +57,7 @@ public class offer_a_ride extends Fragment {
     ImageView Calenderiv;
     private int mYear, mMonth, mDay, mHour, mMinute,position;
     AVLoadingIndicatorView avi;
+    LinearLayout dateLL;
 
 
     @Nullable
@@ -68,6 +69,7 @@ public class offer_a_ride extends Fragment {
             Toast.makeText(getActivity(), "Please connect to the internet!", Toast.LENGTH_LONG).show();
         }
         spinner = (AutoCompleteTextView) v.findViewById(R.id.spin);
+        dateLL = (LinearLayout)v.findViewById(R.id.dateLL);
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.select_dialog_item,locations);
         actv= (AutoCompleteTextView)v.findViewById(R.id.from);

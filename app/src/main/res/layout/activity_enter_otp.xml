@@ -44,7 +44,7 @@
             android:layout_marginBottom="24dp"
             android:padding="12dp"
             android:layout_gravity="center_horizontal"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/buttons"
             android:elevation="20dp"
             android:textColor="@color/white"
             android:text="NEXT"/>

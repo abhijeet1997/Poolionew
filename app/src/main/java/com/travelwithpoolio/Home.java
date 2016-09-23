@@ -207,10 +207,10 @@ public class Home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if(!InternetConnectionClass.isConnected(getApplicationContext())){
-            Toast.makeText(Home.this, "Please connect to the internet!", Toast.LENGTH_LONG).show();
-            return false;
-        }
+//        if(!InternetConnectionClass.isConnected(getApplicationContext())){
+//            Toast.makeText(Home.this, "Please connect to the internet!", Toast.LENGTH_LONG).show();
+//            return false;
+//        }
         switch (id){
             case R.id.nav_find:
                 fab.setVisibility(View.VISIBLE);

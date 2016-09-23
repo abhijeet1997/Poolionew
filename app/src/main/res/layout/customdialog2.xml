@@ -36,7 +36,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:id="@+id/button_exit"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/buttons"
             android:textColor="@color/white"
             android:text="Exit"/>
 

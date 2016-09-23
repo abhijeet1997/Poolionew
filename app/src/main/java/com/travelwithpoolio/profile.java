@@ -181,7 +181,7 @@ public class profile extends android.support.v4.app.Fragment {
     }
 
 
-    void addProfile(final View view,String mobile,String email, String v_name, String v_number, String dl)
+    void addProfile(final View view, final String mobile, String email, String v_name, String v_number, String dl)
     {
         //Toast.makeText(view.getContext(),"Message saved in db",Toast.LENGTH_SHORT).show();
         class addProfileClass extends AsyncTask<String, Void, String> {
@@ -199,7 +199,7 @@ public class profile extends android.support.v4.app.Fragment {
                 loading.dismiss();
                 if("".equals(s))
                 {
-                    s="Server error, Please try again after some time!";
+                    s="Poor internet, please try again";
                 }
                 else if("successfully added".equalsIgnoreCase(s)){
 
@@ -208,6 +208,7 @@ public class profile extends android.support.v4.app.Fragment {
 
                     Intent in = new Intent(view.getContext(),Home.class);
                     in.putExtra("switch","ride");
+                    in.putExtra("mobile",mobile);
                     startActivity(in);
                 }
 

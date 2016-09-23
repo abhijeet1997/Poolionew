@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.wang.avi.AVLoadingIndicatorView;
@@ -76,15 +77,24 @@ public class Messages extends android.support.v4.app.Fragment {
 
 
     public List<Data> fill_with_data(){
+        try {
 
-        List<Data> data  = new ArrayList<>();
-        for (int i = 0 ; i<messages.length ; i++){
-            if (messages[i]!=null) {
-                data.add(new Data(messages[i],mobile_book[i],timestamp[i]));
+            List<Data> data = new ArrayList<>();
+            for (int i = 0; i < messages.length; i++) {
+                if (messages[i] != null) {
+                    data.add(new Data(messages[i], mobile_book[i], timestamp[i]));
+                }
+
             }
-
+            return data;
         }
-        return data;
+        catch (Exception e)
+        {
+
+            Toast.makeText(getContext(),"Poor internet, please try again",Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
 
     }
 
@@ -139,15 +149,23 @@ public class Messages extends android.support.v4.app.Fragment {
 
                 }
                 List<Data> data = fill_with_data();
-                if(messages.length==0)
-                {
-                    recyclerView.setVisibility(View.GONE);
-                    sorryIV.setVisibility(View.VISIBLE);
-                    sorryTV.setVisibility(View.VISIBLE);
+                try {
+                    if (messages.length == 0) {
+                        recyclerView.setVisibility(View.GONE);
+                        sorryIV.setVisibility(View.VISIBLE);
+                        sorryTV.setVisibility(View.VISIBLE);
+                    }
+
+
+                    final Recycler_View_Adapter_Message adapter = new Recycler_View_Adapter_Message(data, getActivity());
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 }
-                final Recycler_View_Adapter_Message adapter  = new Recycler_View_Adapter_Message(data , getActivity());
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager( new LinearLayoutManager(getContext()));
+                catch (Exception e)
+                {
+                    Toast.makeText(getContext(),"Poor internet, please try again",Toast.LENGTH_SHORT).show();
+                }
+
 
             }
 

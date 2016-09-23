@@ -116,7 +116,7 @@
             android:text="Create Account"
             android:padding="12dp"
             android:layout_gravity="center_horizontal"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/buttons"
             android:elevation="20dp"
             android:textColor="@color/white"
             />

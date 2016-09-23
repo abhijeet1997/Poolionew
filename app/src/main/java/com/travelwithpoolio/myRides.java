@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -134,18 +135,23 @@ public class myRides extends android.support.v4.app.Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if(id.length==0)
-                {
-                    recyclerView.setVisibility(View.GONE);
-                    sorryIV.setVisibility(View.VISIBLE);
-                    sorryTV.setVisibility(View.VISIBLE);
+                try {
+                    if (id.length == 0) {
+                        recyclerView.setVisibility(View.GONE);
+                        sorryIV.setVisibility(View.VISIBLE);
+                        sorryTV.setVisibility(View.VISIBLE);
 
+                    }
+                    List<Data> data = fill_with_data();
+
+                    final Recycler_View_Adapter2 adapter = new Recycler_View_Adapter2(data, getActivity());
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 }
-                List<Data> data = fill_with_data();
-
-                final Recycler_View_Adapter2 adapter  = new Recycler_View_Adapter2(data , getActivity());
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager( new LinearLayoutManager(getContext()));
+                catch (Exception e)
+                {
+                    Toast.makeText(getContext(),"Poor internet, please try again",Toast.LENGTH_SHORT).show();
+                }
 
             }
 

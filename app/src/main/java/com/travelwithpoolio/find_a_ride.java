@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class find_a_ride extends Fragment {
     private ImageView dateIv, timeIV;
     private int mYear, mMonth, mDay, mHour, mMinute;
     CoordinatorLayout mCoordinatorLayout;
+    LinearLayout dateLL, timeLL;
 
 
     @Nullable
@@ -51,6 +53,8 @@ public class find_a_ride extends Fragment {
         actv2.setThreshold(0);
         actv2.setAdapter(adapter);
         actv2.setTextColor(Color.RED);
+        dateLL = (LinearLayout)v.findViewById(R.id.dateLL);
+        timeLL=(LinearLayout)v.findViewById(R.id.timeLL);
 
         dateET = (EditText)v.findViewById(R.id.date);
         timeET = (EditText)v.findViewById(R.id.time);
@@ -92,69 +96,91 @@ public class find_a_ride extends Fragment {
 
 
         }});
+        dateLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDatePicker();
+            }
+        });
 
         dateIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!InternetConnectionClass.isConnected(getActivity())){
-                    Toast.makeText(getActivity(), "Please connect to the internet!", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext() , new DatePickerDialog.OnDateSetListener() {
-
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-                               dateforsql= year + "-" + (monthOfYear + 1)+"-"+dayOfMonth;
-                                dateET.setText(dayOfMonth+ "-" + (monthOfYear + 1)+"-"+year);
-
-                            }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                datePickerDialog.show();
+                openDatePicker();
 
 
             }
 
+        });
+        timeLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openTimePicker();
+            }
         });
 
         timeIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!InternetConnectionClass.isConnected(getActivity())){
-                    Toast.makeText(getActivity(), "Please connect to the internet!", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                final Calendar c = Calendar.getInstance();
-                mHour = c.get(Calendar.HOUR_OF_DAY);
-                mMinute = c.get(Calendar.MINUTE);
-
-                // Launch Time Picker Dialog
-                TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
-                        new TimePickerDialog.OnTimeSetListener() {
-
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay,
-                                                  int minute) {
-                                String hour=String.valueOf(hourOfDay);
-                                if(hour.length()<2){
-                                 hour="0"+hour;
-                                }
-                                timeET.setText(hour + ":" + minute);
-                            }
-                        }, mHour, mMinute, false);
-
-                timePickerDialog.show();
+                openTimePicker();
 
             }
         });
         return v;
+    }
+
+    void openDatePicker()
+    {
+        if(!InternetConnectionClass.isConnected(getActivity())){
+            Toast.makeText(getActivity(), "Please connect to the internet!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext() , new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                dateforsql= year + "-" + (monthOfYear + 1)+"-"+dayOfMonth;
+                dateET.setText(dayOfMonth+ "-" + (monthOfYear + 1)+"-"+year);
+
+            }
+        }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.show();
+    }
+
+    void openTimePicker()
+    {
+        if(!InternetConnectionClass.isConnected(getActivity())){
+            Toast.makeText(getActivity(), "Please connect to the internet!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        final Calendar c = Calendar.getInstance();
+        mHour = c.get(Calendar.HOUR_OF_DAY);
+        mMinute = c.get(Calendar.MINUTE);
+
+        // Launch Time Picker Dialog
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                          int minute) {
+                        String hour=String.valueOf(hourOfDay);
+                        if(hour.length()<2){
+                            hour="0"+hour;
+                        }
+                        timeET.setText(hour + ":" + minute);
+                    }
+                }, mHour, mMinute, false);
+
+        timePickerDialog.show();
     }
 
 
