@@ -418,7 +418,7 @@ public class offer_a_ride extends Fragment {
     }
 
     //11 parameters
-    public void offer(String mobile, String source, String destination, String type, String date, String time, String vname, String vnumber, final int availableSeats, int chargeable, int amount, String msg){
+    public void offer(final String mobile, String source, String destination, String type, String date, String time, String vname, String vnumber, final int availableSeats, int chargeable, int amount, String msg){
         class OfferTheRide extends AsyncTask<String, Void, String> {
 //            ProgressDialog loading;
             RegisterUserClass ruc=new RegisterUserClass();
@@ -441,6 +441,7 @@ public class offer_a_ride extends Fragment {
                 }
                 else if("successfully registered".equalsIgnoreCase(s)){
                     Intent myIntent = new Intent(getContext(), Confirmation.class);//Need to make an activity saying your ride has been offered succesfully and will be displayed soon
+                   myIntent.putExtra("mobile",mobile);
                     startActivity(myIntent);
                     //getActivity().overridePendingTransition(R.anim.next_slide_in, R.anim.next_slide_out);
                    // Toast.makeText(getContext(),"Ride offered",Toast.LENGTH_SHORT).show();

@@ -155,7 +155,7 @@ public class SplashScreen extends Activity {
                 button_download.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = "https://play.google.com/store/apps/details?id=androarmy.torque&hl=en";
+                        String url = "https://poolio.in/app";
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_VIEW);
                         intent.addCategory(Intent.CATEGORY_BROWSABLE);
@@ -180,7 +180,7 @@ public class SplashScreen extends Activity {
                 button_close.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = "https://play.google.com/store/apps/details?id=com.zipyrides&hl=en";
+                        String url = "https://poolio.in/app";
 
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_VIEW);
@@ -219,6 +219,10 @@ public class SplashScreen extends Activity {
                 if("success".equalsIgnoreCase(s)){
 
                     Intent intent = new Intent(SplashScreen.this,Home.class);
+                    SharedPreferences mSharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = mSharedPreferences.edit();
+                    editor.putString("mobile",mobile);
+                    editor.commit();
                     intent.putExtra("mobile",mobile);
                     intent.putExtra("pass",pass);
                     startActivity(intent);

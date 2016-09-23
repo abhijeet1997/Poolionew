@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         button_signin = (Button) findViewById(R.id.btn_signin);
         button_signup = (Button) findViewById(R.id.btn_signup);
         fab = (com.github.clans.fab.FloatingActionMenu) findViewById(R.id.fab_actionmenu);
-        fab.setVisibility(View.VISIBLE);
+        fab.showMenu(true);
         parentView = (CoordinatorLayout) findViewById(R.id.mainact_layout);
         button_signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void cancel(View v) {
-        fab.setVisibility(View.GONE);
+        fab.hideMenu(true);
     }
 
     public void policeSupport(View v) {

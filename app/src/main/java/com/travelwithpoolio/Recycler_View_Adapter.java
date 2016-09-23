@@ -77,7 +77,12 @@ public class Recycler_View_Adapter  extends RecyclerView.Adapter<Recycler_View_A
         holder.vehicleName=list.get(position).getVehicle_name();
         holder.vehicleType=list.get(position).getType();
         holder.mobile_number=list.get(position).getMobile();
-        holder.msg=list.get(position).getMsg();
+        if("".equalsIgnoreCase(list.get(position).getMsg()) || list.get(position).getMsg()==null || "null".equalsIgnoreCase(list.get(position).getMessage())){
+            holder.msg="(no message)";
+        }
+        else {
+            holder.msg=list.get(position).getMsg();
+        }
         holder.vehicleNo=list.get(position).getVehicle_number();
         holder.device_id=list.get(position).getDevice_id();
         //button disable code:
@@ -173,7 +178,8 @@ public class Recycler_View_Adapter  extends RecyclerView.Adapter<Recycler_View_A
                     TextView tv_vehicleNo=(TextView)dialog.findViewById(R.id.vehicle_number);
                     TextView tv_vehicleName=(TextView)dialog.findViewById(R.id.vehicle_name);
                     messageTv=(TextView)dialog.findViewById(R.id.msgTv);
-                    messageTv.setText(msg);
+                    if(msg==null|| "".equalsIgnoreCase(msg)|| "null".equalsIgnoreCase(msg)){
+                    messageTv.setText(msg);}
                     tv_name.setText(name.getText());
 //                    tv_location.setText("TBA");
 //                    tv_wait.setText("TBA");
@@ -248,7 +254,7 @@ public class Recycler_View_Adapter  extends RecyclerView.Adapter<Recycler_View_A
         }
     }
 
-    void saveMessage(final View view, String message,String message2, String mobile, String name_book,String mobile_book)
+    void saveMessage(final View view, String message, String message2, final String mobile, String name_book, String mobile_book)
     {
         //Toast.makeText(view.getContext(),"Message saved in db",Toast.LENGTH_SHORT).show();
         class saveMessageClass extends AsyncTask<String, Void, String> {
@@ -272,6 +278,7 @@ public class Recycler_View_Adapter  extends RecyclerView.Adapter<Recycler_View_A
 
                     //Toast.makeText(view.getContext(),"Booked, wait for the call.",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(view.getContext(),Home.class);
+                    intent.putExtra("mobile",mobile);
                     intent.putExtra("switch","message");
                     view.getContext().startActivity(intent);
 

@@ -1,6 +1,8 @@
 package com.travelwithpoolio;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -182,6 +184,10 @@ public class SignUp extends AppCompatActivity {
                 else if("successfully registered".equalsIgnoreCase(s)){
                     Intent myIntent = new Intent(SignUp.this, Home.class);
                     myIntent.putExtra("mobile",mobile);
+                     SharedPreferences mSharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = mSharedPreferences.edit();
+                    editor.putString("mobile",mobile);
+                    editor.commit();
                     myIntent.putExtra("pass",password);
                     startActivity(myIntent);
                     overridePendingTransition(R.anim.next_slide_in, R.anim.next_slide_out);

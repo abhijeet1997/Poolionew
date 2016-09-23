@@ -157,6 +157,7 @@ public class Faq extends AppCompatActivity {
         // handle arrow click here
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(getApplicationContext(),Home.class);
+
             startActivity(intent);
             overridePendingTransition(R.anim.next_slide_in, R.anim.next_slide_out);
         }
