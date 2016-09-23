@@ -248,7 +248,7 @@ public class Recycler_View_Adapter  extends RecyclerView.Adapter<Recycler_View_A
         }
     }
 
-    void saveMessage(final View view, String message,String message2, String mobile, String name_book,String mobile_book)
+    void saveMessage(final View view, String message, String message2, final String mobile, String name_book, String mobile_book)
     {
         //Toast.makeText(view.getContext(),"Message saved in db",Toast.LENGTH_SHORT).show();
         class saveMessageClass extends AsyncTask<String, Void, String> {
@@ -272,6 +272,7 @@ public class Recycler_View_Adapter  extends RecyclerView.Adapter<Recycler_View_A
 
                     //Toast.makeText(view.getContext(),"Booked, wait for the call.",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(view.getContext(),Home.class);
+                    intent.putExtra("mobile",mobile);
                     intent.putExtra("switch","message");
                     view.getContext().startActivity(intent);
 

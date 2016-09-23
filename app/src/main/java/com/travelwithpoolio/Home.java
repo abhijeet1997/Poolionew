@@ -69,7 +69,8 @@ public class Home extends AppCompatActivity
     int j=0;
     com.github.clans.fab.FloatingActionMenu fab;
     public String[][] rate;
-//    com.github.clans.fab.FloatingActionButton fab2;
+    com.github.clans.fab.FloatingActionButton fab2;
+
     public final String PROFILE_URL ="http://www.poolio.in/pooqwerty123lio/profile.php";
     public final String RATE_URL ="http://www.poolio.in/pooqwerty123lio/rate_fetch.php";//Sumit's pc
     @Override
@@ -77,8 +78,8 @@ public class Home extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         fab = (com.github.clans.fab.FloatingActionMenu) findViewById(R.id.fab_home);
-//        fab2=(com.github.clans.fab.FloatingActionButton)findViewById(R.id.material_design_floating_action_menu_item2);
-        fab.setVisibility(View.VISIBLE);
+        fab2=(com.github.clans.fab.FloatingActionButton)findViewById(R.id.material_design_floating_action_menu_item2);
+        fab.showMenu(true);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         permissionCheck();
@@ -295,8 +296,8 @@ public class Home extends AppCompatActivity
     private void ShareIt(){
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "poolio");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "testing share..");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "POOLIO");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Do you know you can save and earn through POOLIO? download poolio's app now:"+" http://poolio.in/app");
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 
@@ -416,7 +417,7 @@ public class Home extends AppCompatActivity
         frc.execute();
     }
     public void cancel(View v) {
-        fab.setVisibility(View.GONE);
+        fab.hideMenu(true);
     }
 
     public void policeSupport(View v) {

@@ -38,7 +38,7 @@ public class Contact_Us extends Fragment {
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String number = "tel:" + "9003757281";
+                String number = "tel:" + "9414568550";
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(number));
                 intent.putExtra(Intent.EXTRA_PHONE_NUMBER, number);
                 Intent chosenIntent = Intent.createChooser(intent, "Contact us!");
@@ -62,7 +62,7 @@ public class Contact_Us extends Fragment {
 
 
 
-                Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + "poolio.developers@gmail.com"));
+                Intent intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + "poolio.travel@gmail.com"));
                 startActivity(intent);
             }
         });

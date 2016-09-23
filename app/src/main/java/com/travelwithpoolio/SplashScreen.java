@@ -155,7 +155,7 @@ public class SplashScreen extends Activity {
                 button_download.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = "https://play.google.com/store/apps/details?id=androarmy.torque&hl=en";
+                        String url = "https://poolio.in/app";
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_VIEW);
                         intent.addCategory(Intent.CATEGORY_BROWSABLE);
@@ -180,7 +180,7 @@ public class SplashScreen extends Activity {
                 button_close.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = "https://play.google.com/store/apps/details?id=com.zipyrides&hl=en";
+                        String url = "https://poolio.in/app";
 
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_VIEW);
