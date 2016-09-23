@@ -1,22 +1,26 @@
 package com.travelwithpoolio;
 
 import android.*;
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -35,7 +39,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -53,6 +60,12 @@ public class Home extends AppCompatActivity
     Fragment fragment = null;
     Class fragmentClass = null;
     String lon,lat;
+    LocationManager locationManager;
+    LocationListener ll;
+    int flag;
+    private int P_GRANTED=1;
+    private boolean permission_OK=false;
+    int i=0;
     int j=0;
     com.github.clans.fab.FloatingActionMenu fab;
     public String[][] rate;
@@ -68,7 +81,7 @@ public class Home extends AppCompatActivity
         fab.setVisibility(View.VISIBLE);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        permissionCheck();
         Intent intent=getIntent();
         mobile =intent.getStringExtra("mobile");
         password= intent.getStringExtra("pass");
@@ -153,7 +166,7 @@ public class Home extends AppCompatActivity
         } else {
 
 
-            SweetAlertDialog pDialog = new SweetAlertDialog(Home.this, SweetAlertDialog.CUSTOM_IMAGE_TYPE);
+            SweetAlertDialog pDialog = new SweetAlertDialog(Home.this, SweetAlertDialog.WARNING_TYPE);
             pDialog.getProgressHelper().setBarColor(Color.parseColor("#3F51B5"));
             pDialog .setTitleText("Do you want to Exit ?")
                     .setCancelText("No")
@@ -275,7 +288,7 @@ public class Home extends AppCompatActivity
         session.edit().clear().commit();
         SharedPreferences userdetails = getSharedPreferences("UserDetails",MODE_PRIVATE);
         userdetails.edit().clear().commit();
-        Intent in= new Intent(this,MainActivity.class);
+        Intent in= new Intent(this,Home.class);
         startActivity(in);
         overridePendingTransition(R.anim.previous_slide_in, R.anim.previous_slide_out);
     }
@@ -337,7 +350,6 @@ public class Home extends AppCompatActivity
             protected String doInBackground(String... params) {
                 HashMap<String,String> data = new HashMap<>();
                 data.put("mobile",params[0]);
-
                 RegisterUserClass ruc = new RegisterUserClass();
                 String result = ruc.sendPostRequest(PROFILE_URL,data);
                 return result;
@@ -427,50 +439,174 @@ public class Home extends AppCompatActivity
 
     }
 
+
     public void shareYourLocation(View v) {
+        try {
+            lon="";
+            lat="";
+            Log.d("Permission tag",String.valueOf(permission_OK));
+            if (permission_OK) if (isLocationServiceEnabled()) {
+                locationManager = (LocationManager) getApplicationContext()
+                        .getSystemService(LOCATION_SERVICE);
+                ll = new LocationListener() {
 
-        final LocationManager locationManager = (LocationManager) getApplicationContext()
-                .getSystemService(LOCATION_SERVICE);
-        LocationListener ll = new LocationListener() {
+                    @Override
+                    public void onLocationChanged(Location location) {
+                        lon = String.valueOf(location.getLongitude());
+                        lat = String.valueOf(location.getLatitude());
+                        shareloc(lon,lat);
+                    }
 
-            @Override
-            public void onLocationChanged(Location location) {
-                lon = String.valueOf(location.getLongitude());
-                lat = String.valueOf(location.getLatitude());
+                    @Override
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                    }
+
+                    @Override
+                    public void onProviderEnabled(String provider) {
+
+                    }
+
+                    @Override
+                    public void onProviderDisabled(String provider) {
+
+                    }
+                };
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    permissionCheck();
+                    return;
+                }
+                Criteria criteria = new Criteria();
+                // Getting the name of the provider that meets the criteria
+                String provider = locationManager.getBestProvider(criteria, false);
+                Location location = locationManager.getLastKnownLocation(provider);
+                if (location != null) {
+                    lon = String.valueOf(location.getLongitude());
+                    lat = String.valueOf(location.getLatitude());
+                    shareloc(lon,lat);
+                }
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, ll);
+                if ("".equalsIgnoreCase(lon) || "".equalsIgnoreCase("len")) {
+                    Log.d("either lat or long", "::are null");
+                    Toast.makeText(Home.this, "Please wait while we fetch your location.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+            } else {
+                Toast.makeText(Home.this, "Please turn on location services.", Toast.LENGTH_SHORT).show();
+                buildAlertMessageNoGps();
+
             }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
+            else {
+                Toast.makeText(Home.this, "Please give location permissions.", Toast.LENGTH_SHORT).show();
+                permissionCheck();
             }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        };
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            Toast.makeText(Home.this, "Please give permissions", Toast.LENGTH_SHORT).show();
-
-            return;
+        } catch (Exception e) {
+            Toast.makeText(Home.this, "failed", Toast.LENGTH_SHORT).show();
+            Log.d("share your loc", "failed" + e.getMessage() + "Cause :" + e.getCause());
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,ll);
-        if("".equalsIgnoreCase(lon)||"".equalsIgnoreCase("len")){
-            Log.d("either lat or long","::are null");
-            return;
+    }
+    public boolean isLocationServiceEnabled() {
+        LocationManager locationManager = null;
+        boolean gps_enabled = false, network_enabled = false;
+
+        if (locationManager == null)
+            locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        try {
+            gps_enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch (Exception ex) {
+            Toast.makeText(Home.this, "Location Service check failed.", Toast.LENGTH_SHORT).show();
         }
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+        try {
+            network_enabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch (Exception ex) {
+            Toast.makeText(Home.this, "Location Service check failed.", Toast.LENGTH_SHORT).show();
+        }
+
+        return gps_enabled || network_enabled;
+
+    }
+
+    public void permissionCheck() {
+        int hasLocationPermission = -1;
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            hasLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+            if (hasLocationPermission != PackageManager.PERMISSION_GRANTED) {
+                Log.d("locationPermission", "added in list");
+                listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+
+            } else if(hasLocationPermission == PackageManager.PERMISSION_GRANTED) {
+                permission_OK = true;
+                Log.d("Permission tag","true");
+            }
+            if (!listPermissionsNeeded.isEmpty()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), P_GRANTED);
+                }
+                return;
+            }
+        }
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (grantResults.length > 0) {
+            if (permissions[i] == Manifest.permission.ACCESS_FINE_LOCATION) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("permissiongranted", "location");
+                    permission_OK = true;
+                } else {
+                    finish();
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0])) {
+                        Toast.makeText(this, "This application needs permission to access location for security purpose!"
+                                + "please allow it.", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+
+        }
+    }
+
+    void shareloc(String lon, String lat) {
+        locationManager.removeUpdates(ll);
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "poolio");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "i am in DANGER. Please locate me at :" +
-                " lon="+lon+" lat="+lat);
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "poolio");
+        String loc=String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%s,%s ", lon, lat);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, "I am in DANGER. Please locate me at :" +loc+"\n"+ "(lon=" + lon + "" +
+                ") (lat=" + lat+")\n");
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog,  final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
 
     }
 
