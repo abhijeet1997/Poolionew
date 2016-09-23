@@ -156,6 +156,35 @@
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:id="@+id/findall"
+        android:layout_gravity="center_horizontal"
+        >
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/checkbox"
+            />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+            <TextView android:id="@+id/txt"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Find all rides"
+                      android:textSize="18dp"
+                      android:layout_marginTop="2dp"
+                      android:layout_marginLeft="20dp"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+
+    </RelativeLayout>
 
 
 

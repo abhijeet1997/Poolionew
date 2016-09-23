@@ -4,18 +4,21 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
+
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,12 +39,13 @@ public class find_a_ride extends Fragment {
     private int mYear, mMonth, mDay, mHour, mMinute;
     CoordinatorLayout mCoordinatorLayout;
     LinearLayout dateLL, timeLL;
+    CheckBox mCheckBox;
+    String findall="false";
 
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.activity_find_a_ride, container, false);
+        final View v =  inflater.inflate(R.layout.activity_find_a_ride, container, false);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.select_dialog_item,locations);
 
@@ -55,7 +59,7 @@ public class find_a_ride extends Fragment {
         actv2.setTextColor(Color.RED);
         dateLL = (LinearLayout)v.findViewById(R.id.dateLL);
         timeLL=(LinearLayout)v.findViewById(R.id.timeLL);
-
+        mCheckBox=(CheckBox)v.findViewById(R.id.checkbox);
         dateET = (EditText)v.findViewById(R.id.date);
         timeET = (EditText)v.findViewById(R.id.time);
         b=(Button) v.findViewById(R.id.btn_find);
@@ -73,15 +77,24 @@ public class find_a_ride extends Fragment {
                 drop= actv2.getText().toString();
                 date= dateET.getText().toString();
                 time= timeET.getText().toString();
+                Log.d("***CHECKBOX**",String.valueOf(mCheckBox.isChecked()));
+                if(mCheckBox.isChecked())
+                {
+                    findall="true";
+                }
+                else
+                {
+                    findall="false";
+                }
 
                 if(pickup.equals("")||drop.equals("")||date.equals("")||time.equals(""))
                 {
                     //Toast.makeText(getContext(),"Please enter all values",Toast.LENGTH_SHORT).show();
-                    Snackbar snackbar = Snackbar.make(getView(),"Please fill all values",Snackbar.LENGTH_SHORT);
+                    Snackbar snackbar = Snackbar.make(v,"Please fill all values",Snackbar.LENGTH_SHORT);
                     snackbar.show();
                 }
                 else if(drop.equalsIgnoreCase(pickup)){
-                    Snackbar snackbar = Snackbar.make(getView(),"Drop and pickup locations should be different.",Snackbar.LENGTH_SHORT);
+                    Snackbar snackbar = Snackbar.make(v,"Drop and pickup locations should be different.",Snackbar.LENGTH_SHORT);
                     snackbar.show();
                 }
                 else
@@ -91,6 +104,7 @@ public class find_a_ride extends Fragment {
                     in.putExtra("drop",drop);
                     in.putExtra("date",dateforsql);
                     in.putExtra("time",time);
+                    in.putExtra("findall",findall);
                     startActivity(in);
                 }
 
@@ -126,7 +140,25 @@ public class find_a_ride extends Fragment {
 
             }
         });
+
+
+        mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                {
+                    Snackbar.make(v,"It will show all rides from all sources",Snackbar.LENGTH_SHORT).show();
+
+                }
+
+            }
+        }
+        );
+
+
         return v;
+
     }
 
     void openDatePicker()
