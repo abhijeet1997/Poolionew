@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cv"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:elevation="15dp"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardUseCompatPadding="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:background="#fff"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:background="?android:attr/selectableItemBackground"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <ImageView
+                android:id="@+id/img_type"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:paddingTop="@dimen/nav_header_vertical_spacing"
+                android:src="@drawable/default_profile_pic"
+                android:scaleType="fitCenter"/>
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/gender_tv"-->
+                <!--android:textSize="16dp"-->
+                <!--android:text="gender"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_toRightOf="@+id/img_user"-->
+                <!--android:layout_below="@+id/name_tv"-->
+                <!--android:layout_toEndOf="@+id/img_user"/>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/name_tv"
+                android:textSize="16dp"
+                android:text="name"
+                android:layout_marginLeft="10dp"
+                android:textColor="#000"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/img_type"
+                android:layout_toEndOf="@+id/img_type"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/name_tv"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="07dp"
+                android:id="@+id/linearLayout">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/source_tv"
+                android:textSize="15sp"
+                android:text="source"
+                android:textColor="#000"
+
+                />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:id="@+id/logo"
+                android:src="@drawable/ic_arrow_forward_black_24dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/destination_tv"
+                android:textSize="15sp"
+                android:text="destination"
+                android:textColor="#000"
+                />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/vehiclelayer"
+                android:layout_below="@+id/img_type"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp">
+
+
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Type"-->
+                    <!--android:textSize="18dp"-->
+                    <!--android:id="@+id/type_tv"/>-->
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Vehicle name"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:textSize="18dp"-->
+                <!--android:id="@+id/vehiclename_tv"/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="18dp"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:text="Vehincle No"-->
+                    <!--android:id="@+id/vehicleno_tv"/>-->
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/vehiclelayer"
+                android:orientation="horizontal"
+                android:id="@+id/timestamplayer"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="70dp">
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15-07-2016"
+                    android:textSize="15sp"
+                    android:id="@+id/date_tv"
+                    android:textColor="#000"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="20dp"
+                    android:text="21:28"
+                    android:id="@+id/time_tv"
+                    android:textColor="#000"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/timestamplayer"
+                android:layout_marginTop="10dp"
+                android:id="@+id/linearLayout2">
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent">-->
+                    <!--<Button-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Call"-->
+                        <!--android:id="@+id/button"/>-->
+                    <!--<Button-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Book"-->
+                        <!--android:layout_alignParentRight="true"/>-->
+
+                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:text="mobile"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:id="@+id/mobile"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_centerVertical="true"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_toRightOf="@+id/button"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_toEndOf="@+id/button"/>&ndash;&gt;-->
+                <!--</RelativeLayout>-->
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/btn_book"
+                android:layout_alignBottom="@+id/linearLayout2"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/send"/>
+
+        </RelativeLayout>
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:elevation="20dp"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardUseCompatPadding="true"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="10dp"
+    android:background="#fff">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/firstrow">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timestamp"
+            android:textSize="15dp"
+            android:text="Fri, 26 Aug, 7:41 pm"
+            android:typeface="serif"
+            android:textColor="#000"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Ride ID: "
+            android:typeface="serif"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/ride_id"
+            android:layout_toStartOf="@+id/ride_id"
+            android:textColor="#000"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ride_id"
+            android:textSize="15dp"
+            android:text="1234"
+            android:typeface="serif"
+            android:layout_alignParentRight="true"
+            android:textColor="#000"/>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/secondrow"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/firstrow">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/source"
+            android:text="From : "
+            android:textSize="13dp"
+            android:textColor="#000"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/destination"
+            android:text="To      : "
+            android:textSize="13dp"
+            android:layout_below="@+id/source"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="3dp"
+            android:textColor="#000"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:layout_below="@+id/destination"
+            android:text="Date : "
+            android:textSize="13dp"
+            android:layout_marginTop="3dp"
+            android:textColor="#000"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/time"
+            android:layout_below="@+id/date"
+            android:text="Time : "
+            android:textSize="13dp"
+            android:layout_marginTop="3dp"
+            android:textColor="#000"/>
+    </RelativeLayout>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/button_complete"
+            android:layout_below="@+id/firstrow"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/tick"
+            android:layout_marginTop="20dp"
+            />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/button_cancel"
+            android:layout_below="@+id/button_complete"
+            android:layout_alignLeft="@+id/button_complete"
+            android:layout_alignStart="@+id/button_complete"
+            android:layout_alignRight="@+id/button_complete"
+            android:layout_alignEnd="@+id/button_complete"
+            android:src="@drawable/cross"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:singleLine="false"
+            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:maxLines="3"
+            android:text=""
+            android:id="@+id/status_tv"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:textColor="#000"
+            />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

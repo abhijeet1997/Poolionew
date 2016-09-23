@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.travelwithpoolio">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-feature android:name="android.hardware.location.gps"/>
+    <uses-feature android:name="android.hardware.location"/>
+    <uses-feature android:name="android.hardware.location.network"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:theme="@style/MyMaterialTheme"
+        tools:replace="android:icon">
+        <activity
+            android:name="com.travelwithpoolio.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
+        <activity android:name="com.travelwithpoolio.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.travelwithpoolio.OTP"
+            android:theme="@style/AppFullScreenTheme" />
+        <activity
+            android:name="com.travelwithpoolio.EnterOTP"
+            android:theme="@style/AppFullScreenTheme" />
+
+        <activity
+            android:name="com.travelwithpoolio.SignUp"
+            android:theme="@style/AppFullScreenTheme" />
+        <activity
+            android:name="com.travelwithpoolio.SignIn"
+            android:theme="@style/AppFullScreenTheme" />
+        <activity
+            android:name="com.travelwithpoolio.Home"
+            android:label="@string/title_activity_home"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name="com.travelwithpoolio.find_a_ride"
+            android:theme="@style/AppFullScreenTheme" />
+        <activity
+            android:name="com.travelwithpoolio.WelcomeSlider"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.travelwithpoolio.Confirmation"
+            android:label="@string/title_activity_confirmation"
+            android:theme="@style/AppFullScreenTheme" />
+        <activity android:name="com.travelwithpoolio.available_rides" />
+        <activity
+            android:name="com.travelwithpoolio.details_ride"
+            android:label="@string/title_activity_details_ride"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.travelwithpoolio.ForgotPassword" />
+        <activity android:name="com.travelwithpoolio.Faq"/>
+    </application>
+
+</manifest>

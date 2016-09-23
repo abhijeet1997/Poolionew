@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:id="@+id/heading_tv"
+        android:textSize="25dp"
+        android:text="header"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/description_tv"
+        android:layout_below="@+id/heading_tv"
+        android:textSize="20dp"
+        android:text="descrption"
+        android:layout_marginTop="40dp"/>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp">
+        <Button
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_continue"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:text="Continue"
+            android:elevation="10dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"/>
+        <Button
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_download"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:elevation="4dp"
+            android:text="Update"/>
+    </TableRow>
+
+</RelativeLayout>

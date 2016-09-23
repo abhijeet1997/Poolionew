@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/nvtop">
+        <item
+            android:id="@+id/nav_find"
+            android:icon="@drawable/magnify"
+            android:title="Rides"
+            android:checked="true"/>
+        <item
+            android:id="@+id/rate_card"
+            android:icon="@drawable/calculator"
+            android:title="Rate Calculator"
+            android:checked="true"/>
+        <item
+            android:id="@+id/nav_myrides"
+            android:icon="@drawable/motorbike"
+            android:title="My Rides"
+            android:checked="false"/>
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/face_profile"
+            android:title="My profile"
+            android:checked="false"/>
+
+        <item
+            android:id="@+id/nav_messages"
+            android:title="Messages"
+            android:icon="@drawable/message"
+            android:checked="false"/>
+
+
+    </group>
+
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/nvbottom">
+
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/share_variant"
+                android:title="Share"
+                android:checked="false"/>
+            <item
+                android:id="@+id/nav_contact"
+                android:icon="@android:drawable/ic_dialog_email"
+                android:title="Contact us"
+                android:checked="false"/>
+
+
+            <item android:id="@+id/nav_feedback"
+                android:title="Feedback"
+                android:icon="@drawable/comment_text"
+                android:checked="false"
+
+                />
+
+
+
+
+        </group>
+
+    <item
+        android:id="@+id/sign_out"
+        android:icon="@drawable/signout"
+        android:title="Sign-out"
+        android:checked="false"
+        />
+
+</menu>
