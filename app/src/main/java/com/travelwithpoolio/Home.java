@@ -88,7 +88,7 @@ public class Home extends AppCompatActivity
         password= intent.getStringExtra("pass");
         SharedPreferences mSharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
         String mob = mSharedPreferences.getString("mobile", "null");
-        fetchDetails(mobile);
+        fetchDetails(mob);
         fetchRates();
         SharedPreferences session = getSharedPreferences("session", MODE_PRIVATE);
         SharedPreferences.Editor editor=session.edit();
@@ -332,9 +332,10 @@ public class Home extends AppCompatActivity
                 }
                 mSharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = mSharedPreferences.edit();
+                editor.putString("mobile",mobile);
                 editor.putString("name",first_name+" "+last_name);
                 editor.putString("gender",gender);
-                editor.putString("mobile",mobile);
+
                 editor.putString("email",email);
                 editor.putString("vehicle_name",vehicle_name);
                 editor.putString("vehicle_number",vehicle_number);

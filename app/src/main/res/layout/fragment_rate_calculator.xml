@@ -78,10 +78,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_below="@+id/cv">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:text="\u2022 The rates are based on per seat. \n\u2022 Anyone using our services is bound to use above calculated rates. \n\u2022 In public transport like cabs and autos the fare needs to be divided. "/>
 
     </RelativeLayout>

@@ -219,6 +219,10 @@ public class SplashScreen extends Activity {
                 if("success".equalsIgnoreCase(s)){
 
                     Intent intent = new Intent(SplashScreen.this,Home.class);
+                    SharedPreferences mSharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = mSharedPreferences.edit();
+                    editor.putString("mobile",mobile);
+                    editor.commit();
                     intent.putExtra("mobile",mobile);
                     intent.putExtra("pass",pass);
                     startActivity(intent);

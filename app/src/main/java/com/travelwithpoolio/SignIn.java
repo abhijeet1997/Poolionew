@@ -124,6 +124,10 @@ public class SignIn extends AppCompatActivity {
                 if("success".equalsIgnoreCase(s)){
 
                     Intent intent = new Intent(SignIn.this,Home.class);
+                    mSharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = mSharedPreferences.edit();
+                    editor.putString("mobile",mobile);
+                    editor.commit();
                     intent.putExtra("mobile",mobile);
                     intent.putExtra("pass",password);
                     startActivity(intent);
