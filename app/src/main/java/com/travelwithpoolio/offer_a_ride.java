@@ -40,6 +40,7 @@ public class offer_a_ride extends Fragment {
     public final String OFFER_URL="http://www.poolio.in/pooqwerty123lio/offer.php";// Sumit's pc
     String dateforsql,timeforsql;
     String[] locations ={"SRM Arch Gate","Abode Valley","Estancia","SRM Backgate","Potheri Station/Main Campus","Green Pearl","Safa", "Akshaya","Airport","Central Station","Egmore Station"};//need to make it dynamic
+    String[] locations_destination ={"SRM Arch Gate","Abode Valley","Estancia","SRM Backgate","Potheri Station/Main Campus","Green Pearl","Safa", "Akshaya","Airport","Central Station","Egmore Station","Other"};//need to make it dynamic
     List<String> vehicleType = new ArrayList<String>(); //No need for dynamic i suppose
     //public static Spinner spinner;
     String[] vehicless={"Bike","Car","Auto","Cab"};
@@ -48,7 +49,7 @@ public class offer_a_ride extends Fragment {
     int availableSeats, amount=0;
     public int chargeable=1; //false for free ride
     SharedPreferences pref;
-    EditText sourceET,destinationET, dateET, timeET,vnameET,vnumberET,availableET,messagev;
+    EditText sourceET,destinationET, dateET, timeET,vnameET,vnumberET,availableET,messagev,to_ET;
     static RadioGroup chargeableRG;
     Button offer_button;
     static int dayCheck;
@@ -57,7 +58,7 @@ public class offer_a_ride extends Fragment {
     ImageView Calenderiv;
     private int mYear, mMonth, mDay, mHour, mMinute,position;
     AVLoadingIndicatorView avi;
-    LinearLayout dateLL;
+    LinearLayout dateLL,otherLL;
 
 
     @Nullable
@@ -70,15 +71,18 @@ public class offer_a_ride extends Fragment {
         }
         spinner = (AutoCompleteTextView) v.findViewById(R.id.spin);
         dateLL = (LinearLayout)v.findViewById(R.id.dateLL);
+        to_ET=(EditText)v.findViewById(R.id.toET);
+        otherLL = (LinearLayout)v.findViewById(R.id.otherLL);
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.select_dialog_item,locations);
+        final ArrayAdapter<String> adapter_dest = new ArrayAdapter<String>(getContext(),android.R.layout.select_dialog_item,locations_destination);
         actv= (AutoCompleteTextView)v.findViewById(R.id.from);
         actv.setThreshold(1);
         actv.setAdapter(adapter);
         actv.setTextColor(Color.RED);
         actv2= (AutoCompleteTextView)v.findViewById(R.id.to);
         actv2.setThreshold(0);
-        actv2.setAdapter(adapter);
+        actv2.setAdapter(adapter_dest);
         actv2.setTextColor(Color.RED);
         messagev=(EditText) v.findViewById(R.id.messageET);
         avi=(AVLoadingIndicatorView) v.findViewById(R.id.avi_offerride);
@@ -115,6 +119,20 @@ public class offer_a_ride extends Fragment {
             vnameET.setHint("Cab company");
             vnumberET.setVisibility(View.GONE);
         }
+
+        actv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(actv2.getText().toString().equalsIgnoreCase("other"))
+                {
+                    otherLL.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    otherLL.setVisibility(View.GONE);
+                }
+            }
+        });
 
 
 
@@ -308,6 +326,10 @@ public class offer_a_ride extends Fragment {
         mobile = pref.getString("mobile", null);
         source = sourceET.getText().toString().trim();
         destination = destinationET.getText().toString().trim();
+        if(actv2.getText().toString().equalsIgnoreCase("other"))
+        {
+            destination=to_ET.getText().toString();
+        }
 
         type = spinner.getText().toString();
         if ("".equalsIgnoreCase(dateforsql) || "".equalsIgnoreCase(timeforsql)) {

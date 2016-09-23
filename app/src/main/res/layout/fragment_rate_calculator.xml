@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 tools:context="com.travelwithpoolio.RateCalculator">
     <android.support.v7.widget.CardView
@@ -11,6 +11,7 @@
         android:elevation="10dp"
         android:layout_margin="10dp"
         app:cardCornerRadius="20dp"
+        android:id="@+id/cv"
 
         >
     <RelativeLayout
@@ -71,5 +72,18 @@
 
     </RelativeLayout>
     </android.support.v7.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/cv">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\u2022 The rates are based on per seat. \n\u2022 Anyone using our services is bound to use above calculated rates. \n\u2022 In public transport like cabs and autos the fare needs to be divided. "/>
+
+    </RelativeLayout>
 
 </RelativeLayout>
