@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.msg91.sendotp.library.SendOtpVerification;
 import com.msg91.sendotp.library.Verification;
 import com.msg91.sendotp.library.VerificationListener;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.math.BigInteger;
 import java.nio.charset.Charset;
@@ -27,15 +28,19 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
+
 public class ForgotPassword extends AppCompatActivity implements VerificationListener {
     EditText mPhone,otpet,pass_et,retypepass_et;
     String phoneNo,otp,password;
     RelativeLayout relativeLayoutOtp,relativeLayoutMobInput,relativeLayoutPassword;
     CountDownTimer countDownTimer;
+
     private Verification mVerification;
       private final String MOBVER_URL = "http://www.poolio.in/pooqwerty123lio/mobforgot.php";
       private final String MOBUPDATE_URL="http://www.poolio.in/pooqwerty123lio/mobupdate.php";
     View parentview;
+    AVLoadingIndicatorView avi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +49,8 @@ public class ForgotPassword extends AppCompatActivity implements VerificationLis
         mPhone = (EditText) findViewById(R.id.input_number);
         relativeLayoutOtp=(RelativeLayout)findViewById(R.id.relative_layout_otp);
         relativeLayoutMobInput=(RelativeLayout)findViewById(R.id.mob_input_rl);
+        avi=(AVLoadingIndicatorView)findViewById(R.id.avi_msg);
+        avi.setVisibility(View.GONE);
         relativeLayoutPassword=(RelativeLayout)findViewById(R.id.password_rl);
         otpet=(EditText)findViewById(R.id.input_otp);
         pass_et=(EditText)findViewById(R.id.input_pass);
@@ -245,20 +252,23 @@ public class ForgotPassword extends AppCompatActivity implements VerificationLis
     }
     private void register(String mobile, String password) {
         class RegisterUser extends AsyncTask<String, Void, String> {
-            ProgressDialog loading;
+//            ProgressDialog loading;
             RegisterUserClass ruc = new RegisterUserClass();
 
 
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(ForgotPassword.this, "Please Wait",null, true, true);
+                avi.setVisibility(View.VISIBLE);
+                avi.show();
+//                loading = ProgressDialog.show(ForgotPassword.this, "Please Wait",null, true, true);
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                loading.dismiss();
+//                loading.dismiss();
+                avi.hide();
                 if("".equals(s))
                 {
                     s="server error Please try again after some time!";
