@@ -288,7 +288,7 @@ public class Home extends AppCompatActivity
         session.edit().clear().commit();
         SharedPreferences userdetails = getSharedPreferences("UserDetails",MODE_PRIVATE);
         userdetails.edit().clear().commit();
-        Intent in= new Intent(this,Home.class);
+        Intent in= new Intent(this,MainActivity.class);
         startActivity(in);
         overridePendingTransition(R.anim.previous_slide_in, R.anim.previous_slide_out);
     }
