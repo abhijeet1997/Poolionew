@@ -80,7 +80,7 @@ SharedPreferences mSharedPreferences;
                 loading.dismiss();
                 if("".equals(s))
                 {
-                    s="Server error, Please try again after some time!";
+                    s="Poor Internet, please try again.";
                 }
                 else if("successfully saved".equalsIgnoreCase(s)){
 

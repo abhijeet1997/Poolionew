@@ -128,7 +128,7 @@ public class ForgotPassword extends AppCompatActivity implements VerificationLis
                 super.onPostExecute(s);
                 //  loading.dismiss();
                 if ("".equals(s)) {
-                    s = "server error Please try again after some time!";
+                    s = "Poor internet, please try again.";
                 } else if ("proceed".equalsIgnoreCase(s)) {
                    //if mobile is verified then,
                     relativeLayoutOtp.setVisibility(View.VISIBLE);

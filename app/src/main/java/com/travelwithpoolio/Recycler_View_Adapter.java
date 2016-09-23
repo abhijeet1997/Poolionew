@@ -266,7 +266,7 @@ public class Recycler_View_Adapter  extends RecyclerView.Adapter<Recycler_View_A
                 loading.dismiss();
                 if("".equals(s))
                 {
-                    s="Server error, Please try again after some time!";
+                    s="Poor Internet, please try again.";
                 }
                 else if("successfully saved".equalsIgnoreCase(s)){
 

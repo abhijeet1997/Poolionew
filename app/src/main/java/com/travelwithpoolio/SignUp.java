@@ -177,7 +177,7 @@ public class SignUp extends AppCompatActivity {
 //                loading.dismiss();
                 if("".equals(s))
                 {
-                    s="Server error, Please try again after some time!";
+                    s="Poor Internet, please try again.";
                 }
                 else if("successfully registered".equalsIgnoreCase(s)){
                     Intent myIntent = new Intent(SignUp.this, Home.class);
