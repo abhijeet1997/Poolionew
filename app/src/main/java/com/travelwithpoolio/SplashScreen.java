@@ -1,13 +1,20 @@
 package com.travelwithpoolio;
 
+import android.*;
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -32,7 +39,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -47,6 +56,9 @@ public class SplashScreen extends Activity {
     public final String CONDITION_URL="http://www.poolio.in/pooqwerty123lio/conditions.php";//Sumit's pc
     private String password = null;
     int flag;
+    private int P_GRANTED=1;
+    private boolean permission_OK=false;
+    int i=0;
     ImageView logo;
     String heading, description;
     String mob,pass;
@@ -59,6 +71,7 @@ public class SplashScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         temp=savedInstanceState;
+
         logo=(ImageView) findViewById(R.id.logo_splash);
         OneSignal.startInit(this).init();
                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -357,6 +370,8 @@ public class SplashScreen extends Activity {
         super.onResume();
         onCreate(temp);
     }
+
+
 
 
 
