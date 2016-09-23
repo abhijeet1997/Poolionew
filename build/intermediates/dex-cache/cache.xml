@@ -1,12 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
-
-    <item
-        jar="/Users/kjaganmohan/AndroidStudioProjects/poolio/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="aa3f2b748d127183624feae91abb8cb581cd1f29">
-        <dex dex="/Users/kjaganmohan/AndroidStudioProjects/poolio/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_36e6500c864a64961cecd2a34a032048d8479815/classes.dex" />
-    </item>
-
-</items>
+<items version="2" />
