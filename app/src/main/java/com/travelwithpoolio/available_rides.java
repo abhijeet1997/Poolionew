@@ -28,7 +28,7 @@ import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 public class available_rides extends AppCompatActivity {
     String [] id,mobile, source, destination, type, date, time, vehicle_name,vehicle_number, seats, first_name, last_name, gender,device_id,msg;
     RecyclerView recyclerView;
-    String drop;
+    String drop,findall;
 //    SwipeRefreshLayout mSwipeRefreshLayout;
     WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
     public final String FIND_URL="http://www.poolio.in/pooqwerty123lio/find.php";//Sumit's pc
@@ -46,6 +46,7 @@ public class available_rides extends AppCompatActivity {
          drop= intent.getStringExtra("drop");
         final String date= intent.getStringExtra("date");
         final String time= intent.getStringExtra("time");
+        findall =intent.getStringExtra("findall");
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         sorryTV=(TextView)findViewById(R.id.sorrytv);
         infoTV=(TextView)findViewById(R.id.infotv);
@@ -53,7 +54,7 @@ public class available_rides extends AppCompatActivity {
        // Log.i("**PREVIOUS ACTIVITY**",pickup+" "+drop);
          avi=(AVLoadingIndicatorView)findViewById(R.id.avi);
         avi.setVisibility(View.GONE);
-        findRide(pickup,drop,date,time);
+        findRide(pickup,drop,date,time,findall);
         //Toast.makeText(getApplicationContext(),json,Toast.LENGTH_LONG).show();
 
       //  mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
@@ -63,7 +64,7 @@ public class available_rides extends AppCompatActivity {
                 // Do work to refresh the list here.
                 //Log.d("**REFRESHING**","reffreshing");
                 refreshing=1;
-                findRide(pickup,drop,date,time);
+                findRide(pickup,drop,date,time,findall);
 
 
 
@@ -92,20 +93,20 @@ public class available_rides extends AppCompatActivity {
         }
 
     }
-    void findRide(String pickup,String drop,String date, String time)
+    void findRide(String pickup,String drop,String date, String time, String findall)
     {
         if(!InternetConnectionClass.isConnected(getApplicationContext())){
             Toast.makeText(getApplicationContext(), "Please connect to the internet!", Toast.LENGTH_LONG).show();
             return;
         }
         else
-            fetchRides(pickup,drop,date,time);
+            fetchRides(pickup,drop,date,time,findall);
 
 
 
     }
 
-    private void fetchRides(final String pickup,final String drop,final String date, final String time){
+    private void fetchRides(final String pickup,final String drop,final String date, final String time, final String findall){
         class fetchRideClass extends AsyncTask<String,Void,String> {
 //            ProgressDialog loading;
             @Override
@@ -144,6 +145,7 @@ public class available_rides extends AppCompatActivity {
                 data.put("drop",params[1]);
                 data.put("date",params[2]);
                 data.put("time",params[3]);
+                data.put("findall",params[4]);
 
                 RegisterUserClass ruc = new RegisterUserClass();
                 String result = ruc.sendPostRequest(FIND_URL,data);
@@ -151,7 +153,7 @@ public class available_rides extends AppCompatActivity {
             }
         }
         fetchRideClass frc = new fetchRideClass();
-        frc.execute(pickup,drop,date,time);
+        frc.execute(pickup,drop,date,time,findall);
     }
 
     private void showRides(String json){
