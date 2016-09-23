@@ -384,6 +384,10 @@ public class offer_a_ride extends Fragment {
             Snackbar snackbar = Snackbar.make(getView(),"Please fill all values",Snackbar.LENGTH_SHORT);
             snackbar.show();
         }
+        else if(source.equalsIgnoreCase(destination)){
+            Snackbar snackbar = Snackbar.make(getView(),"Source and destination should be different.",Snackbar.LENGTH_SHORT);
+            snackbar.show();
+        }
         else
         {
             offer(mobile, source, destination, type, date, time, vname, vnumber, availableSeats, chargeable, amount,msg);
@@ -411,7 +415,7 @@ public class offer_a_ride extends Fragment {
 
                 if("".equals(s))
                 {
-                    s="Server error, Please try again after some time!";
+                    s="Poor Internet, please try again.";
                 }
                 else if("successfully registered".equalsIgnoreCase(s)){
                     Intent myIntent = new Intent(getContext(), Confirmation.class);//Need to make an activity saying your ride has been offered succesfully and will be displayed soon

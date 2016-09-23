@@ -117,6 +117,10 @@ public class SignIn extends AppCompatActivity {
                 super.onPostExecute(s);
 //                loading.dismiss();
                 avi.hide();
+                if("".equalsIgnoreCase(s))
+                {
+                    s="Poor internet, please try again later.";
+                }
                 if("success".equalsIgnoreCase(s)){
 
                     Intent intent = new Intent(SignIn.this,Home.class);
@@ -166,7 +170,7 @@ public class SignIn extends AppCompatActivity {
                // loading.dismiss();
                 if("".equals(s))
                 {
-                    s="Server error, Please try again after some time!";
+                    s="Poor Internet, please try again.";
                 }
                 else if("device is successfully registered".equalsIgnoreCase(s)){
                     SharedPreferences sp = getSharedPreferences("device_id",MODE_PRIVATE);
